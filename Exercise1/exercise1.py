@@ -5,6 +5,8 @@ stop_words_lines = stop_words_file.readlines();
 
 stop_words = [];
 
+words = {};
+
 def is_legal(letter):
     return letter != ' ' and letter != ',' and letter != '.' and letter != '"' and letter != '?' and letter != '!' and letter != ';';
 
@@ -28,6 +30,10 @@ for line in story:
         if (letter +1) != len(line) and is_legal(line[letter]):
             word += line[letter];
             if (is_not_legal(line[letter + 1])):
-                word = word.lower();
-                print(word);
-                word = '';
+                if word in stop_words:
+                    word = '';
+                    print("stop word!");
+                else:
+                    word = word.lower();
+                    print(word);
+                    word = '';
