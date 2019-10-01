@@ -30,12 +30,25 @@ for line in story:
         if (letter +1) != len(line) and is_legal(line[letter]):
             word += line[letter];
             if (is_not_legal(line[letter + 1])):
+                word = word.lower();
                 if word in stop_words:
-                    print("stop word!");
+                    pass;
                 else:
                     if word in words:
-                        pass;
+                        words[word] += 1;
                     else:
                         words[word] = 1
-                print(word);
                 word = '';
+
+
+rank = 1
+while rank <= 25:
+    frequency = 0;
+    frequent_word = ''
+    for word in words:
+        if words[word] > frequency:
+            frequent_word = word;
+            frequency = words[word];
+    print(str(rank) + '. ' + frequent_word + ' - ' + str(frequency));
+    words.pop(frequent_word);
+    rank += 1;
