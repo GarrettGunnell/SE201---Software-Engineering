@@ -31,9 +31,11 @@ for line in story:
             word += line[letter];
             if (is_not_legal(line[letter + 1])):
                 if word in stop_words:
-                    word = '';
                     print("stop word!");
                 else:
-                    word = word.lower();
-                    print(word);
-                    word = '';
+                    if word in words:
+                        pass;
+                    else:
+                        words[word] = 1
+                print(word);
+                word = '';
