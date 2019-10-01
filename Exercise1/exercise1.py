@@ -1,10 +1,8 @@
-
 stop_words_file = open("stop_words.txt", "r");
-
+story = open("neuromancer.txt", "r");
 stop_words_lines = stop_words_file.readlines();
-
+rank = 1
 stop_words = [];
-
 words = {};
 
 def is_legal(letter):
@@ -22,12 +20,10 @@ for line in stop_words_lines:
                 stop_words.append(word);
                 word = '';
 
-story = open("test.txt", "r");
-
 for line in story:
     word = '';
     for letter in range(len(line)):
-        if (letter +1) != len(line) and is_legal(line[letter]):
+        if (letter + 1) != len(line) and is_legal(line[letter]):
             word += line[letter];
             if (is_not_legal(line[letter + 1])):
                 word = word.lower();
@@ -40,8 +36,6 @@ for line in story:
                         words[word] = 1
                 word = '';
 
-
-rank = 1
 while rank <= 25:
     frequency = 0;
     frequent_word = ''
