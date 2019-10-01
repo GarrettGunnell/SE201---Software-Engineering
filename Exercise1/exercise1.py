@@ -5,6 +5,12 @@ stop_words_lines = stop_words_file.readlines();
 
 stop_words = [];
 
+def is_legal(letter):
+    return letter != ' ' and letter != ',' and letter != '.' and letter != '"' and letter != '?' and letter != '!' and letter != ';';
+
+def is_not_legal(letter):
+    return letter == ' ' or letter == ',' or letter == '.' or letter == '"' or letter == '?' or letter == '!' or letter == ';';
+
 for line in stop_words_lines:
     word = '';
     for letter in range(len(line)):
@@ -14,5 +20,14 @@ for line in stop_words_lines:
                 stop_words.append(word);
                 word = '';
 
-for i in stop_words:
-    print(i)
+story = open("test.txt", "r");
+
+for line in story:
+    word = '';
+    for letter in range(len(line)):
+        if (letter +1) != len(line) and is_legal(line[letter]):
+            word += line[letter];
+            if (is_not_legal(line[letter + 1])):
+                word = word.lower();
+                print(word);
+                word = '';
